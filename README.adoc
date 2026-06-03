@@ -84,7 +84,8 @@ Here's a rough list of the AsciiDoc syntax that downdoc current handles:
 * escaped ifdef, ifndef, and include preprocessor directives
 * tables
  ** cols attirbute with optional horizontal alignments
- ** explicit header row or implicit header row unless noheader option is set
+ ** explicit header row or implicit header row (unless noheader option is set)
+ ** header row must always be defined on a single line
  ** no support for cell style (ignores cell style in colspec and cellspec)
 * collapsible blocks (set the `markdown-collapsible-variant` attribute to `spoiler` to generate Zulip-compatible spoiler block)
 * comment lines and blocks

@@ -1979,6 +1979,25 @@ describe('downdoc()', () => {
       assert.equal(downdoc(input), expected)
     })
 
+    // NOTE this is a negative test
+    it('should require header to be defined on single line, even if cols are specified', () => {
+      const input = heredoc`
+      [%header,cols=1;2]
+      |===
+      | Name
+      | Description
+      | The Name
+      | The Description
+      |===
+      `
+      const expected = heredoc`
+      | Name |
+      | --- | --- |
+      | Description | The Name |
+      `
+      assert.equal(downdoc(input), expected)
+    })
+
     it('should not promote first row to header if noheader option is set', () => {
       const input = heredoc`
       [%noheader]
