@@ -1,6 +1,6 @@
 {
   "files": {
-    "includes": ["biome.json", "lib/**/*.js", "npm/**/*.js", "test/**/*.js"]
+    "includes": ["biome.json", "{lib,npm,test}/**/*.js"]
   },
   "formatter": {
     "enabled": true,
