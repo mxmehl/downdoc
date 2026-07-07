@@ -1947,7 +1947,7 @@ describe('downdoc()', () => {
     it('should not promote first row to header if preceded by empty line', () => {
       const input = heredoc`
       |===
-      
+
       | A1
 
       | A2
@@ -4062,6 +4062,40 @@ describe('downdoc()', () => {
 
       [^1]: First note.
       [^2]: Second note.
+      `
+      assert.equal(downdoc(input), expected)
+    })
+
+    it('should convert footnote macro referenced via attribute', () => {
+      const input = heredoc`
+      = Title
+      :link-apply: https://example.org[Online form]footnote:[https://example.org]
+
+      Apply via {link-apply} today.
+      `
+      const expected = heredoc`
+      # Title
+
+      Apply via [Online form](https://example.org)[^1] today.
+
+      [^1]: https://example.org
+      `
+      assert.equal(downdoc(input), expected)
+    })
+
+    it('should reuse named footnote referenced via attribute', () => {
+      const input = heredoc`
+      = Title
+      :fn: seefootnote:note[https://example.org]
+
+      First {fn} and second {fn}.
+      `
+      const expected = heredoc`
+      # Title
+
+      First see[^1] and second see[^1].
+
+      [^1]: https://example.org
       `
       assert.equal(downdoc(input), expected)
     })
